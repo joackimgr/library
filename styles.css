@@ -32,18 +32,71 @@ body {
     font-weight: 600;
 }
 
-button {
+#newBookBtn {
     width: 220px;
-    height: 80px;
-    font-size: 30px;
+    height: 70px;
+    font-size: 26px;
     border-radius: 2rem;
     border: none;
     cursor: pointer;
     margin-top: 30px;
     margin-bottom: 100px;
+    background-color: #007bff;
+    color: white;
     transition: background-color 0.2s;
 }
 
-button:hover {
-    background-color: rgb(228, 227, 227);
+#newBookBtn:hover {
+    background-color: #0471e6;
+}
+
+dialog {
+    border: none;
+    border-radius: 1.5rem;
+    width: 350px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+form input {
+    height: 25px;
+}
+
+
+input[type = "submit"] {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+input[type = "submit"]:hover {
+    background-color: #0471e6;
+}
+
+#cancelBtn {
+    background-color: rgb(228, 70, 70);
+    color: white;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cancelBtn:hover {
+    background-color: rgb(212, 68, 68);
+}
+
+input[type = "submit"], #cancelBtn {
+    height: 45px;
+    font-size: 18px;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
 }
