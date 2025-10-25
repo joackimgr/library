@@ -31,7 +31,7 @@ for (let i = 0; i < myLibrary.length; i++) {
     let pages = document.createElement("pages");
     pages.classList.add("pages");
     let read = document.createElement("div");
-    read.classList.add("read");
+    read.classList.add("read");``
     title.append(curBook.title);
     author.append(`Author: ${curBook.author}`)
     pages.append(`Pages: ${curBook.pages}`);
@@ -42,3 +42,13 @@ for (let i = 0; i < myLibrary.length; i++) {
     card.append(read);
     booksList.append(card);
 }
+let newBtn = document.querySelector("#newBookBtn");
+let dial = document.querySelector("#dial");
+newBtn.addEventListener("click", () => {
+    dial.showModal();
+})
+
+let cancelBtn = document.querySelector("#cancelBtn");
+cancelBtn.addEventListener("click", () => {
+    dial.close();
+})
