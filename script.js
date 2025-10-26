@@ -14,34 +14,52 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 }
 
-addBookToLibrary("book1", "author1", "100", "true");
-addBookToLibrary("book2", "author2", "100", "false");
-addBookToLibrary("book3", "author3", "100", "false");
-
-for (let i = 0; i < myLibrary.length; i++) {
+function displayBooks() {
     let booksList = document.querySelector(".books");
-    let curBook = myLibrary[i];
-    let card = document.createElement("div");
-    card.classList.add("card");
-    let title = document.createElement("div");
-    title.classList.add("title");
-    let author = document.createElement("div");
-    // author.classList.add("author");
-    author.classList.add("author");
-    let pages = document.createElement("pages");
-    pages.classList.add("pages");
-    let read = document.createElement("div");
-    read.classList.add("read");``
-    title.append(curBook.title);
-    author.append(`Author: ${curBook.author}`)
-    pages.append(`Pages: ${curBook.pages}`);
-    read.append(curBook.read);
-    card.append(title);
-    card.append(author);
-    card.append(pages);
-    card.append(read);
-    booksList.append(card);
+    booksList.innerHTML = "";
+    for (let i = 0; i < myLibrary.length; i++) {
+        let curBook = myLibrary[i];
+        let card = document.createElement("div");
+        card.classList.add("card");
+        let title = document.createElement("div");
+        title.classList.add("title");
+        let author = document.createElement("div");
+        author.classList.add("author");
+        let pages = document.createElement("pages");
+        pages.classList.add("pages");
+        let read = document.createElement("div");
+        read.classList.add("read");``
+        if (curBook.read === true || curBook.read === "true") {
+            read.append("Status: Read");
+        } else {
+            read.append("Status: Not Read");
+        }
+        title.append(curBook.title);
+        author.append(`Author: ${curBook.author}`)
+        pages.append(`Pages: ${curBook.pages}`);
+        card.append(title);
+        card.append(author);
+        card.append(pages);
+        card.append(read);
+        booksList.append(card);
+    }
 }
+
+let form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let titleVal = document.querySelector("#btitle").value;
+    let authorVal = document.querySelector("#bauthor").value;
+    let pagesVal = document.querySelector("#bpages").value;
+    let readVal = document.querySelector("#bread").checked;
+    addBookToLibrary(titleVal, authorVal, pagesVal, readVal);
+    displayBooks();
+    form.reset();
+    dial.close();
+})
+
+
+
 let newBtn = document.querySelector("#newBookBtn");
 let dial = document.querySelector("#dial");
 newBtn.addEventListener("click", () => {
