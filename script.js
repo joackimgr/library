@@ -19,20 +19,27 @@ function displayBooks() {
     booksList.innerHTML = "";
     for (let i = 0; i < myLibrary.length; i++) {
         let curBook = myLibrary[i];
+        let removeBtn = document.createElement("button");
+        removeBtn.classList.add("removeBtn");
+        removeBtn.innerText = "Remove";
+        removeBtn.dataset.bookId = curBook.id;
         let card = document.createElement("div");
         card.classList.add("card");
         let title = document.createElement("div");
         title.classList.add("title");
         let author = document.createElement("div");
         author.classList.add("author");
-        let pages = document.createElement("pages");
+        let pages = document.createElement("div");
         pages.classList.add("pages");
-        let read = document.createElement("div");
-        read.classList.add("read");``
+        let readBtn = document.createElement("button");
+        readBtn.classList.add("toggleReadBtn");
+        readBtn.dataset.bookId = curBook.id;
         if (curBook.read === true || curBook.read === "true") {
-            read.append("Status: Read");
+            readBtn.innerText = "Read";
+            readBtn.classList.add("readBtn");
         } else {
-            read.append("Status: Not Read");
+            readBtn.innerText = "Not Read";
+            readBtn.classList.add("notReadBtn");
         }
         title.append(curBook.title);
         author.append(`Author: ${curBook.author}`)
@@ -40,7 +47,8 @@ function displayBooks() {
         card.append(title);
         card.append(author);
         card.append(pages);
-        card.append(read);
+        card.append(readBtn);
+        card.append(removeBtn);
         booksList.append(card);
     }
 }
@@ -53,12 +61,12 @@ form.addEventListener("submit", (event) => {
     let pagesVal = document.querySelector("#bpages").value;
     let readVal = document.querySelector("#bread").checked;
     addBookToLibrary(titleVal, authorVal, pagesVal, readVal);
+    let container = document.querySelector(".books");
+    container.style.display = 'grid';
     displayBooks();
     form.reset();
     dial.close();
 })
-
-
 
 let newBtn = document.querySelector("#newBookBtn");
 let dial = document.querySelector("#dial");
@@ -69,4 +77,27 @@ newBtn.addEventListener("click", () => {
 let cancelBtn = document.querySelector("#cancelBtn");
 cancelBtn.addEventListener("click", () => {
     dial.close();
+})
+
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read;
+}
+
+const booksContainer = document.querySelector(".books");
+booksContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("removeBtn")) {
+        const idRemove = event.target.dataset.bookId;
+        const indexRemove = myLibrary.findIndex(book => book.id === idRemove);
+        if (indexRemove > -1) {
+            myLibrary.splice(indexRemove, 1);
+        }
+        displayBooks();
+    } else if (event.target.classList.contains("toggleReadBtn")) {
+        const idToggle = event.target.dataset.bookId;
+        const bookToggle = myLibrary.find(book => book.id === idToggle);
+        if (bookToggle) {
+            bookToggle.toggleReadStatus();
+        }
+        displayBooks();
+    }
 })
