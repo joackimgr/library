@@ -19,11 +19,12 @@
         </div>
     </nav>
     <dialog id="dial" closed>
-        <form method = "dialog">
+        <form method = "dialog" novalidate>
             <label for = "btitle">Title:</label>
             <input type = "text" id = "btitle" name = "btitle" required>
             <label for = "bauthor">Author:</label>
             <input type = "text" id = "bauthor" name = "bauthor" required>
+            <span class = "error" aria-live = "polite"></span>
             <label for = "bpages">Pages:</label>
             <input type = "number" id = "bpages" name = "bpages" required>
             <label for = "bread">Have you read the book?</label>
