@@ -62,6 +62,10 @@ function displayBooks() {
 let form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!author.validity.valid) {
+        showError();
+        return;
+    }
     let titleVal = document.querySelector("#btitle").value;
     let authorVal = document.querySelector("#bauthor").value;
     let pagesVal = document.querySelector("#bpages").value;
@@ -103,3 +107,23 @@ booksContainer.addEventListener("click", (event) => {
         displayBooks();
     }
 })
+
+const author = document.getElementById("bauthor");
+const authorError = document.querySelector(".error");
+
+author.addEventListener("input", () => {
+    if (author.validity.valid) {
+        authorError.textContent = '';
+        authorError.className = 'error';
+    } else {
+        showError();
+    }
+})
+
+function showError() {
+    if (author.validity.valueMissing) {
+        authorError.textContent = 'Author field name must be filled!';
+    };
+
+    authorError.className = 'error active';
+}
